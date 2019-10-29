@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    container_name: django_nginx
+    restart: always
+    ports:
+    - "8001:8001"
+    volumes:
+      - ./src:/src
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+    networks:
+      - webnet
+
+  postgres:
+    image: postgres
+    restart: always
+    container_name: django_postgres
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    networks:
+      - webnet
+
+  web:
+    build: .
+    working_dir: /src
+    user: root
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+    container_name: web_django
+    expose:
+      - "8001"
+    volumes:
+      - ./src:/src
+    networks:
+      - webnet
+    environment:
+      - REDIS_HOST=redis
+    links:
+      - redis
+
+  redis:
+    image: "redis:alpine"
+    container_name: redis_django
+    ports:
+      - "6379:6379"
+    networks:
+      - webnet
+
+networks:
+  webnet:

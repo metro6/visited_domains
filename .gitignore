@@ -1,0 +1,9 @@
+/venv/
+/.idea/
+/src/custom_settings/
+/src/static/
+/src/media/
+*.py[cod]
+node_modules
+/data/
+/postgres/
