@@ -80,7 +80,7 @@ TEMPLATES = [
             ],
             'builtins': ['pypugjs.ext.django.templatetags'],
             'libraries': {
-                # 'template_tags': 'rmrail.templatetags.template_tags',
+                # 'template_tags': '.templatetags.template_tags',
             }
         },
     },
@@ -145,7 +145,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LANGUAGES = [
     ('ru', gettext('ru')),
-    ('en', gettext('en')),
 ]
 
 LOCALE_PATHS = [
@@ -153,30 +152,9 @@ LOCALE_PATHS = [
 ]
 
 
-# ModelTranslation settings
-
-MODELTRANSLATION_LANGUAGES = ('ru', 'en')
-
-MODELTRANSLATION_FALLBACK_LANGUAGES = ('ru', 'en')
-
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
-
-MODELTRANSLATION_DEBUG = False
-
-MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'ru'
-
-
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
-
-
-# Cron jobs
-CRONJOBS = [
-
-    # ('* */1 * * *', 'apps.cron.crontab'),
-
-]
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,

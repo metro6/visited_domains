@@ -63,7 +63,7 @@ def visited_domains(request):
     return Response({'error': 'Некорректный промежуток времени'}, status=400)
 
   if not 'domains' in cache:
-    domains = [item.dimain for item in Domain.objects.filter(visited__gt=from_time, visited__lt=to_time)]
+    domains = [item.domain for item in Domain.objects.filter(visited__gt=from_time, visited__lt=to_time)]
     domains_cache = [{item.domain: item.visited} for item in Domain.objects.all()]
     cache.set('domains', json.dumps(domains_cache), timeout=CACHE_TTL)
   else:
